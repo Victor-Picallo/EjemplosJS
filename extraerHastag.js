@@ -7,10 +7,14 @@ debería devolver: ["regex", "JavaScript", "aprendemos"]*/
 
 function extraerHashtags(texto) {
     // Expresión regular para encontrar hashtags
-    const regex = /#([\wñÑ_]+)/g;
+    const regex = /#([\wñÑáéíóúÁÉÍÓÚ]+)/g;
     const coincidencias = texto.match(regex)
-    return coincidencias.map(tag => tag.slice(1))
+    const lista = coincidencias ? coincidencias.map(tag => tag.slice(1)) : [];
+
+    // Esto se hace para eliminar duplicados
+    const miSet = new Set(lista)
+    return [...miSet]
 }
 
-const hastag = extraerHashtags("Hoy estudiamos #regex en #JavaScript y #aprendemos mucho!");
+const hastag = extraerHashtags("Hoy estudiamos #regex en #JavaScript y #aprendemos mucho #regex!");
 console.log(hastag); // Debería devolver: ["regex", "JavaScript", "aprendemos"]
